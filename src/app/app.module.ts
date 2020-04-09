@@ -43,9 +43,18 @@ import { MatTreeModule} from '@angular/material/tree';
 import { MatRippleModule } from '@angular/material/core';
 import { MatOptionModule } from '@angular/material/core';
 
+import { HeroesComponent } from './heroes/heroes.component';
+import { HeroDetailComponent } from './hero-detail/hero-detail.component';
+import { MessagesComponent } from './messages/messages.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
 @NgModule({
   declarations: [
     AppComponent,
+    HeroesComponent,
+    HeroDetailComponent,
+    MessagesComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
