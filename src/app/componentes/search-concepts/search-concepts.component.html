@@ -1,0 +1,14 @@
+<div id="search-component">
+
+  <input #searchBox (input)="search(searchBox.value)" id="search-box" placeholder="Introduce un termino"/>
+
+  <mat-card *ngFor="let concept of concepts | async" class="item">
+    <mat-card-header>
+      <mat-card-title>{{ concept.title | titlecase }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      {{ concept.content }}
+    </mat-card-content>
+  </mat-card>
+
+</div>

@@ -1,0 +1,42 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Libro Diario</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <table mat-table [dataSource]="dataSource" matSort class="full-width-table" aria-label="Elements">
+      <!-- Fecha Column -->
+      <ng-container matColumnDef="fecha">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
+        <td mat-cell *matCellDef="let row">{{ row.fecha | date }}</td>
+      </ng-container>
+
+      <!-- Cuentas Column -->
+      <ng-container matColumnDef="cuenta">
+        <th mat-header-cell *matHeaderCellDef>Cuentas</th>
+        <td mat-cell *matCellDef="let row">{{row.cuenta}}</td>
+      </ng-container>
+
+      <!-- Descripcion Column -->
+      <ng-container matColumnDef="descripcion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripcion</th>
+        <td mat-cell *matCellDef="let row">{{row.descripcion}}</td>
+      </ng-container>
+
+      <!-- Debe Column -->
+      <ng-container matColumnDef="debe">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Debe(cargo)</th>
+        <td mat-cell *matCellDef="let row">{{ row.debe == 0 ? "" : row.debe | currency}}</td>
+      </ng-container>
+
+      <!-- Haber Column -->
+      <ng-container matColumnDef="haber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Haber(abono)</th>
+        <td mat-cell *matCellDef="let row"><p>{{row.haber == 0 ? "" : row.haber | currency}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+  </mat-card-content>
+</mat-card>

@@ -1,24 +1,29 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
-import { HeroesComponent } from './heroes/heroes.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { HeroDetailComponent } from './hero-detail/hero-detail.component';
-import { ConceptsComponent } from './concepts/concepts.component';
-import { SearchConceptsComponent } from './search-concepts/search-concepts.component';
-
+import {NgModule} from '@angular/core';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
+import {NavComponent} from './componentes/nav/nav.component';
+import {ConceptsComponent} from './componentes/concepts/concepts.component';
+import {SearchConceptsComponent} from './componentes/search-concepts/search-concepts.component';
+import {LandingComponent} from './componentes/landing/landing.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'detail/:id', component: HeroDetailComponent },
-  { path: 'heroes', component: HeroesComponent },
-  { path: 'concepts', component: ConceptsComponent },
-  { path: 'search_concepts', component: SearchConceptsComponent },
+  {path: '', redirectTo: '/landing', pathMatch: 'full'},
+  {path: 'landing', component: LandingComponent},
+  {path: 'nav', component: NavComponent, children: [
+      {path: 'concepts', component: ConceptsComponent},
+      {path: 'search_concepts', component: SearchConceptsComponent},
+      {
+        path:'economics',
+        loadChildren: () => import('./componentes/economics/economics.module').then(m => m.EconomicsModule)
+      }
+    ]
+  },
+
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: PreloadAllModules
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

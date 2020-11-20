@@ -1,0 +1,6 @@
+.container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto, auto);
+  grid-gap: .9em
+}

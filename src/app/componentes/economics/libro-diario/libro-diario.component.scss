@@ -1,0 +1,15 @@
+table {
+  width: 100%;
+}
+
+mat-card {
+  margin: .7em;
+}
+
+tr.mat-footer-row {
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #303030;
+}

@@ -1,0 +1,25 @@
+.T {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-gap: .3em;
+
+  .mat-card table {
+    width: 100%;
+  }
+  mat-card-header {
+    margin-top: .5em;
+  }
+  mat-card-content {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+  }
+  mat-card {
+    padding: 0px;
+    background-color: #303030;
+
+    table {
+      background-color: #303030;
+
+    }
+  }
+}
