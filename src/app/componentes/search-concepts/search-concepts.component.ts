@@ -4,7 +4,7 @@ import {Observable, Subject} from 'rxjs';
 
 import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 
-import {Concept} from '../../modelos/Concept';
+import {Concept} from '../../modelos/concept';
 import {ConceptService} from '../../servicios/concept.service';
 
 @Component({

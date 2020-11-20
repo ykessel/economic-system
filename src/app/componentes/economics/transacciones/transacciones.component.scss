@@ -1,20 +1,8 @@
 mat-card {
-  margin: .7em;
+  width: 50%;
+  margin: 2em auto;
+}
 
-  .T {
-    width: 50%;
-    background-color: #303030;
-    margin: auto;
-    .newT {
-    }
-
-    .newA {
-    }
-
-    mat-form-field {
-      width: 100%;
-    }
-
-  }
-
+mat-form-field {
+  width: 100%;
 }

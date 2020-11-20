@@ -1,42 +1,49 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Libro Diario</mat-card-title>
+    <mat-card-title>Diario</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <table mat-table [dataSource]="dataSource" matSort class="full-width-table" aria-label="Elements">
+    <table [dataSource]="dataSource" aria-label="Elements" class="full-width-table" mat-table matSort>
       <!-- Fecha Column -->
       <ng-container matColumnDef="fecha">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
-        <td mat-cell *matCellDef="let row">{{ row.fecha | date }}</td>
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>Fecha</th>
+        <td *matCellDef="let row" mat-cell>{{ row.fecha | date }}</td>
       </ng-container>
 
       <!-- Cuentas Column -->
       <ng-container matColumnDef="cuenta">
-        <th mat-header-cell *matHeaderCellDef>Cuentas</th>
-        <td mat-cell *matCellDef="let row">{{row.cuenta}}</td>
+        <th *matHeaderCellDef mat-header-cell>Cuentas</th>
+        <td *matCellDef="let row" mat-cell>{{row.cuenta}}</td>
+      </ng-container>
+
+      <!-- Referencia Column -->
+      <ng-container matColumnDef="ref">
+        <th *matHeaderCellDef mat-header-cell> Ref. trasp.</th>
+        <td *matCellDef="let row" mat-cell>{{row.ref}}</td>
       </ng-container>
 
       <!-- Descripcion Column -->
       <ng-container matColumnDef="descripcion">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripcion</th>
-        <td mat-cell *matCellDef="let row">{{row.descripcion}}</td>
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>Descripcion</th>
+        <td *matCellDef="let row" mat-cell>{{row.descripcion}}</td>
       </ng-container>
 
       <!-- Debe Column -->
       <ng-container matColumnDef="debe">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Debe(cargo)</th>
-        <td mat-cell *matCellDef="let row">{{ row.debe == 0 ? "" : row.debe | currency}}</td>
+        <th *matHeaderCellDef mat-header-cell mat-sort-header> Debe(cargo)</th>
+        <td *matCellDef="let row" mat-cell>{{ row.debe == 0 ? "" : row.debe | currency}}</td>
       </ng-container>
 
       <!-- Haber Column -->
       <ng-container matColumnDef="haber">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Haber(abono)</th>
-        <td mat-cell *matCellDef="let row"><p>{{row.haber == 0 ? "" : row.haber | currency}}</td>
+        <th *matHeaderCellDef mat-header-cell mat-sort-header> Haber(abono)</th>
+        <td *matCellDef="let row" mat-cell><p>{{row.haber == 0 ? "" : row.haber | currency}}</td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
 
     </table>
+    <mat-paginator [pageSizeOptions]="[20]" showFirstLastButtons></mat-paginator>
   </mat-card-content>
 </mat-card>

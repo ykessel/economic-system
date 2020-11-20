@@ -15,6 +15,7 @@ export class BalanzaComponent implements OnInit {
   cuentas: MatTableDataSource<Cuenta>;
   saldoDeudor: number;
   saldoAcreedor: number;
+  fecha = new Date(Date.now());
 
   constructor(private cuentasService: CuentasService) { }
 

@@ -1,55 +1,56 @@
 <mat-card>
-    <mat-card-header>
-      <mat-card-title>Crear Transacción</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-card class="T">
-          <form class="newT" [formGroup]="TForm">
+  <mat-card-header>
+    <mat-card-title>Crear Transacción</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="newT" [formGroup]="TForm">
 
-            <mat-form-field appearance="outline">
-              <mat-label>Seleccione una cuenta</mat-label>
-              <mat-select formControlName="cuenta" name="cuenta">
-                <mat-option *ngFor="let cuenta of cuentas" [value]="cuenta.nombre">
-                  {{cuenta.nombre}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Seleccione una cuenta</mat-label>
+        <mat-select formControlName="cuenta" name="cuenta">
+          <mat-option *ngFor="let cuenta of cuentas" [value]="cuenta">
+            {{cuenta.nombre}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-            <br>
+      <br>
 
-            <mat-form-field *ngIf="!TForm.get('haber').dirty" appearance="outline">
-               <mat-label>Debe</mat-label>
-               <input matInput formControlName="debe"/>
-            </mat-form-field>
+      <mat-form-field *ngIf="!TForm.get('haber').dirty" appearance="outline">
+        <mat-label>Debe</mat-label>
+        <input matInput formControlName="debe"/>
+      </mat-form-field>
 
-            <mat-form-field *ngIf="!TForm.get('debe').dirty" appearance="outline">
-                <mat-label>Haber</mat-label>
-                <input matInput formControlName="haber"/>
-            </mat-form-field>
+      <mat-form-field *ngIf="!TForm.get('debe').dirty" appearance="outline">
+        <mat-label>Haber</mat-label>
+        <input matInput formControlName="haber"/>
+      </mat-form-field>
 
-            <br>
+      <br>
 
-            <mat-form-field appearance="outline">
-              <mat-label>Esta transacción afecta a ...</mat-label>
-              <mat-select formControlName="afecta" name="cuenta2">
-                <mat-option *ngFor="let cuenta2 of cuentas" [value]="cuenta2.nombre">
-                  {{cuenta2.nombre}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Esta transacción afecta a ...</mat-label>
+        <mat-select formControlName="afecta" name="cuenta2">
+          <mat-option *ngFor="let cuenta2 of cuentas" [value]="cuenta2">
+            {{cuenta2.nombre}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-            <br>
+      <br>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Descripcion</mat-label>
-                <textarea formControlName="descripcion" matInput placeholder="Ej. Compra de suministros"></textarea>
-            </mat-form-field>
-          </form>
+      <mat-form-field appearance="outline">
+        <mat-label>Descripcion</mat-label>
+        <textarea formControlName="descripcion" matInput placeholder="Ej. Compra de suministros"></textarea>
+      </mat-form-field>
+    </form>
 
-          <mat-card-actions>
-              <button mat-raised-button color="warn">Cancelar</button>
-              <button mat-raised-button type="submit" color="primary" (click)="newT()" >Registrar</button>
-          </mat-card-actions>
-      </mat-card>
-    </mat-card-content>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="warn">Cancelar</button>
+    <button mat-raised-button type="submit" color="primary" (click)="newT(TForm.get('cuenta'), TForm.get('afecta'))">
+      Registrar
+    </button>
+  </mat-card-actions>
 </mat-card>

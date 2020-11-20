@@ -3,6 +3,10 @@
   "compilerOptions": {
     "outDir": "./out-tsc/app",
     "types": [],
+    "paths" : {
+      "@modelos/*" : ["app/modelos/*"],
+      "@servicios/*" : ["app/servicios/*"]
+    },
     "allowSyntheticDefaultImports": true
   },
   "files": [

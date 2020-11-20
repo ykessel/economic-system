@@ -4,6 +4,8 @@ import {AppRoutingModule} from './app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
 
 // Servicios
 import {ConceptService} from './servicios/concept.service';
@@ -71,6 +73,9 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 
+
+// the second parameter 'fr' is optional
+registerLocaleData(localeEs, 'es');
 
 // noinspection AngularInvalidImportedOrDeclaredSymbol
 @NgModule({

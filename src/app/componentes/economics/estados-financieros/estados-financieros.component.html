@@ -1,1 +1,123 @@
-<p>estados-financieros works!</p>
+<mat-tab-group>
+  <mat-tab [label]="estado.nombre" *ngFor="let estado of estados">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ companyName }}</mat-card-title>
+        <mat-card-subtitle>{{estado.nombre}}</mat-card-subtitle>
+        <mat-card-subtitle>Mes terminado el 30 de abril de 2010</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div *ngIf="estado.id === 1">
+          <table mat-table [dataSource]="cuentasIngresos">
+            <ng-container matColumnDef="nombre">
+              <th mat-header-cell *matHeaderCellDef> Ingresos:</th>
+              <td class="nombre" mat-cell *matCellDef="let row"> {{ row.nombre }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="empty">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef></td>
+              <td mat-footer-cell *matFooterCellDef></td>
+            </ng-container>
+
+            <ng-container matColumnDef="saldo">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td class="saldo_ingreso" mat-cell *matCellDef="let row">
+                {{ row.saldo | currency }}
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+          <table mat-table [dataSource]="cuentasGastos">
+
+            <ng-container matColumnDef="nombre">
+              <th mat-header-cell *matHeaderCellDef> Gastos:</th>
+              <td class="nombre" mat-cell *matCellDef="let row">{{ row.nombre }} </td>
+              <td [ngClass]="{'table-footer': utilidadPerdida > 0, 'perdida': utilidadPerdida < 0}" mat-footer-cell
+                  *matFooterCellDef>{{ utilidadPerdida > 0 ? 'Utilidad Neta' : 'Perdida Neta' }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="empty">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td class="saldo_gasto" mat-cell *matCellDef="let row">
+                {{ row.saldo | currency }}
+              </td>
+              <td [ngClass]="{'table-footer': utilidadPerdida > 0, 'perdida': utilidadPerdida < 0}"
+                  mat-footer-cell *matFooterCellDef></td>
+            </ng-container>
+
+            <ng-container matColumnDef="saldo">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef></td>
+              <td [ngClass]="{'table-footer': utilidadPerdida > 0, 'perdida': utilidadPerdida < 0}"
+                  mat-footer-cell *matFooterCellDef>{{ utilidadPerdida | currency }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+          </table>
+        </div>
+        <div *ngIf="estado.id === 2">
+          <table mat-table [dataSource]="cuentasIngresos">
+            <ng-container matColumnDef="nombre">
+              <th mat-header-cell *matHeaderCellDef> Mas:</th>
+              <td class="nombre" mat-cell *matCellDef="let row"> {{ row.nombre }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="empty">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef></td>
+              <td mat-footer-cell *matFooterCellDef></td>
+            </ng-container>
+
+            <ng-container matColumnDef="saldo">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td class="saldo_ingreso" mat-cell *matCellDef="let row">
+                {{ row.saldo | currency }}
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+          <table mat-table [dataSource]="cuentasGastos">
+
+            <ng-container matColumnDef="nombre">
+              <th mat-header-cell *matHeaderCellDef> Menos:</th>
+              <td class="nombre" mat-cell *matCellDef="let row">{{ row.nombre }} </td>
+              <td [ngClass]="{'table-footer': utilidadPerdida > 0, 'perdida': utilidadPerdida < 0}" mat-footer-cell
+                  *matFooterCellDef>{{ utilidadPerdida > 0 ? 'Utilidad Neta' : 'Perdida Neta' }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="empty">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td class="saldo_gasto" mat-cell *matCellDef="let row">
+                {{ row.saldo | currency }}
+              </td>
+              <td [ngClass]="{'table-footer': utilidadPerdida > 0, 'perdida': utilidadPerdida < 0}"
+                  mat-footer-cell *matFooterCellDef></td>
+            </ng-container>
+
+            <ng-container matColumnDef="saldo">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef></td>
+              <td [ngClass]="{'table-footer': utilidadPerdida > 0, 'perdida': utilidadPerdida < 0}"
+                  mat-footer-cell *matFooterCellDef>{{ utilidadPerdida | currency }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+          </table>
+        </div>
+        <div *ngIf="estado.id === 3"></div>
+        <div *ngIf="estado.id === 4"></div>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+</mat-tab-group>

@@ -1,12 +1,9 @@
 // Angular
 import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
-
 // Modelos
 import {Cuenta} from '../../../modelos/cuenta';
 import {Transaccion} from '../../../modelos/transaccion';
-import {Traspaso} from '../../../modelos/traspaso';
-
 // Servicios
 import {CuentasService} from '../../../servicios/cuentas.service';
 import {TransaccionesService} from '../../../servicios/transacciones.service';
@@ -18,21 +15,27 @@ import {TransaccionesService} from '../../../servicios/transacciones.service';
 })
 export class LibroMayorComponent implements OnInit {
 
+  displayedColumns: string[] = ['fecha', 'partida', 'referencia', 'debe', 'haber'];
   transacciones: MatTableDataSource<Transaccion>;
   rootSource: MatTableDataSource<Transaccion>;
-  cuentas: Cuenta[];
+  cuentasActivos: Cuenta[] = [];
+  cuentasPasivos: Cuenta[] = [];
+  cuentasCapital: Cuenta[] = [];
+  cuentasIngresos: Cuenta[] = [];
+  cuentasGastos: Cuenta[] = [];
   isLoading = true;
-  displayedColumns: string[] = ['fecha', 'partida', 'referencia', 'debe', 'haber'];
 
   constructor(private cuentasService: CuentasService,
-              private transaccionesService: TransaccionesService) { }
+              private transaccionesService: TransaccionesService) {
+  }
 
   ngOnInit(): void {
     this.transaccionesService.getTransacciones().subscribe(t => {
       this.transaccionesService.getAfectadas().subscribe(a => {
         this.cuentasService.getCuentas().subscribe(c => {
           this.rootSource = new MatTableDataSource(t.concat(a));
-          this.cuentas = this.usedCuentas(c, t.concat(a));
+          const cuentas = this.usedCuentas(c, t.concat(a));
+          this.distribuirCuentas(cuentas);
           this.isLoading = false;
         });
       });
@@ -40,22 +43,40 @@ export class LibroMayorComponent implements OnInit {
   }
 
   // Filtrar solo las cuentas que son afectadas por las transacciones
-  usedCuentas(c: Cuenta[], t: Transaccion[]) : Cuenta[] {
-      let temp: string[] = [];
-      let cue: Cuenta[] = [];
-      t.forEach(e => {
-        temp.push(e.cuenta);
-      });
+  usedCuentas(c: Cuenta[], t: Transaccion[]): Cuenta[] {
+    const temp: string[] = [];
+    const cue: Cuenta[] = [];
+    t.forEach(e => {
+      temp.push(e.cuenta);
+    });
 
-      c.forEach(e => {
-        temp.forEach(te => {
-          if (!cue.includes(e) && te === e.nombre) {
-            cue.push(e);
-          }
-        });
+    c.forEach(e => {
+      temp.forEach(te => {
+        if (!cue.includes(e) && te === e.nombre) {
+          cue.push(e);
+        }
       });
+    });
 
-      return cue;
+    return cue;
+  }
+
+  // Distribuir cuentas por categoria
+  distribuirCuentas(c: Cuenta[]) {
+    c.forEach(e => {
+      if (e.categoria === 'Activo') {
+        this.cuentasActivos.push(e);
+      } else if (e.categoria === 'Pasivo') {
+        this.cuentasPasivos.push(e);
+      } else if (e.categoria === 'Capital' || e.categoria === 'Retiro') {
+        this.cuentasCapital.push(e);
+      } else if (e.categoria === 'Ingreso') {
+        this.cuentasIngresos.push(e);
+      } else if (e.categoria === 'Gasto') {
+        this.cuentasGastos.push(e);
+      }
+
+    });
   }
 
   // Filtrar el stream para crear un stream para cada cuenta
@@ -71,11 +92,11 @@ export class LibroMayorComponent implements OnInit {
     this.cuentasService.updateCuenta(c).subscribe();
   }
 
-  // Calcular el salda de cada cuenta
+  // TODO:  Arreglar el updateSaldo - Calcular el saldo de cada cuenta
   saldo(c: Cuenta) {
-    let saldo = this.getTotalDebe(c) - this.getTotalHaber(c);
-    //this.updateSaldo(c, saldo);
-    return saldo;
+    const saldo = this.getTotalDebe(c) - this.getTotalHaber(c);
+    // this.updateSaldo(c, saldo);
+    return Math.abs(saldo);
   }
 
   // Calcular el debe total de cada cuenta

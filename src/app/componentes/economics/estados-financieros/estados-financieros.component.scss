@@ -1,0 +1,30 @@
+mat-card {
+  width: 60%;
+  margin: 1em auto;
+}
+
+mat-card-header {
+  display: flex;
+  justify-content: center;
+}
+
+table {
+  width: 100%;
+  background-color: #303030;
+}
+
+.table-footer {
+  background-color: #40ba61;
+}
+
+.perdida {
+  background-color: crimson;
+}
+
+.saldo_ingreso {
+  padding-right: 0 !important;
+}
+
+.nombre {
+  padding-right: 8em;
+}

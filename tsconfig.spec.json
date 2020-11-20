@@ -5,7 +5,11 @@
     "types": [
       "jasmine",
       "node"
-    ]
+    ],
+    "paths" : {
+      "@modelos/*" : ["app/modelos/*"],
+      "@servicios/*" : ["app/servicios/*"]
+    }
   },
   "files": [
     "src/test.ts",

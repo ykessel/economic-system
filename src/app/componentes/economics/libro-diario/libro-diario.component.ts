@@ -4,7 +4,6 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {Transaccion} from '../../../modelos/transaccion';
 import {TransaccionesService} from '../../../servicios/transacciones.service';
-import flatten from '../../../../../node_modules/array-flatten';
 
 @Component({
   selector: 'app-libro-diario',
@@ -17,36 +16,39 @@ export class LibroDiarioComponent implements OnInit {
   transacciones: Transaccion[];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  displayedColumns: string[] = ['fecha', 'cuenta', 'descripcion', 'debe', 'haber'];
+  displayedColumns: string[] = ['fecha', 'cuenta', 'ref', 'descripcion', 'debe', 'haber'];
   dataSource: MatTableDataSource<Transaccion[]>;
 
 
-  constructor(private transaccionesService: TransaccionesService) { }
+  constructor(private transaccionesService: TransaccionesService) {
+  }
 
   ngOnInit() {
     this.transaccionesService.getTransacciones().subscribe(t => {
       this.transaccionesService.getAfectadas().subscribe(a => {
-         this.dataSource = this.OrdenarTransacciones(t, a);
+        this.dataSource = this.OrdenarTransacciones(t, a);
+        this.dataSource.paginator = this.paginator;
       });
-     });
+    });
   }
 
+  // Intercalar las transacciones con su respectivo efecto dual
   merge(ar: Transaccion[], af: Transaccion[]): Transaccion[] {
     const temp: Transaccion[] = [];
-    ar.forEach(tr => {
-       af.forEach(af => {
-           if(tr.afecta === af.id) {
-             temp.push(tr);
-             temp.push(af);
-           }
-       });
+    ar.forEach(t => {
+      af.forEach(a => {
+        if (t.afecta === a.id) {
+          temp.push(t);
+          temp.push(a);
+        }
+      });
     });
     return temp;
   }
 
   OrdenarTransacciones(tr: Transaccion[], af: Transaccion[]): MatTableDataSource<Transaccion[]> {
-      const temp: any[] = this.merge(tr, af);
-      return new MatTableDataSource(temp);
+    const temp: any[] = this.merge(tr, af);
+    return new MatTableDataSource(temp);
   }
 
 }
