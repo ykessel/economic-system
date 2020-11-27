@@ -31,7 +31,7 @@ export class ConceptService {
       return of([]);
     }
     return this.http.get<Concept[]>(`${this.ecoUrl}/?title=${term}`).pipe(
-      tap(_ => this.log(`found Concepts matching "${term}"`)),
+      tap(_ => this.log(`found Concepts matching '${term}'`)),
       catchError(this.handleError<Concept[]>('searchConcepts', []))
     );
   }

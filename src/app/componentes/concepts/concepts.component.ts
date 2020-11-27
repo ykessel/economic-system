@@ -13,14 +13,13 @@ export class ConceptsComponent implements OnInit {
   concepts: Concept[];
   loading = true;
   total: number;
-
   constructor(private conceptService: ConceptService) {  }
 
   ngOnInit() {
     this.getConcepts();
   }
 
-  getConcepts(){
+  getConcepts() {
     this.conceptService.getConcepts()
       .subscribe(concepts => {
         this.concepts = concepts;

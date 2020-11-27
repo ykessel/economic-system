@@ -1,0 +1,17 @@
+{
+    "short_name": "Ecos",
+    "name": "Ecos",
+    "icons": [
+   
+      {
+        "src":"/assets/icon512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }       
+    ],
+    "start_url": "/",
+    "background_color": "#FBFBFB",
+    "theme_color": "#022E63",
+    "display": "standalone",
+    "orientation": "portrait"
+  }

@@ -7,6 +7,7 @@ import {Transaccion} from '../../../modelos/transaccion';
 // Servicios
 import {CuentasService} from '../../../servicios/cuentas.service';
 import {TransaccionesService} from '../../../servicios/transacciones.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-libro-mayor',
@@ -18,7 +19,7 @@ export class LibroMayorComponent implements OnInit {
   displayedColumns: string[] = ['fecha', 'partida', 'referencia', 'debe', 'haber'];
   transacciones: MatTableDataSource<Transaccion>;
   rootSource: MatTableDataSource<Transaccion>;
-  cuentasActivos: Cuenta[] = [];
+  cuentasActivos: Observable<Cuenta[]>;
   cuentasPasivos: Cuenta[] = [];
   cuentasCapital: Cuenta[] = [];
   cuentasIngresos: Cuenta[] = [];
@@ -40,6 +41,8 @@ export class LibroMayorComponent implements OnInit {
         });
       });
     });
+
+    console.log(this.cuentasActivos);
   }
 
   // Filtrar solo las cuentas que son afectadas por las transacciones
@@ -62,18 +65,18 @@ export class LibroMayorComponent implements OnInit {
   }
 
   // Distribuir cuentas por categoria
-  distribuirCuentas(c: Cuenta[]) {
-    c.forEach(e => {
-      if (e.categoria === 'Activo') {
-        this.cuentasActivos.push(e);
-      } else if (e.categoria === 'Pasivo') {
-        this.cuentasPasivos.push(e);
-      } else if (e.categoria === 'Capital' || e.categoria === 'Retiro') {
-        this.cuentasCapital.push(e);
-      } else if (e.categoria === 'Ingreso') {
-        this.cuentasIngresos.push(e);
-      } else if (e.categoria === 'Gasto') {
-        this.cuentasGastos.push(e);
+  distribuirCuentas(cuentas: Cuenta[]) {
+    cuentas.forEach(cuenta => {
+      if (cuenta.categoria === 'Activo') {
+        // this.cuentasActivos.push(cuenta);
+      } else if (cuenta.categoria === 'Pasivo') {
+        this.cuentasPasivos.push(cuenta);
+      } else if (cuenta.categoria === 'Capital' || cuenta.categoria === 'Retiro') {
+        this.cuentasCapital.push(cuenta);
+      } else if (cuenta.categoria === 'Ingreso') {
+        this.cuentasIngresos.push(cuenta);
+      } else if (cuenta.categoria === 'Gasto') {
+        this.cuentasGastos.push(cuenta);
       }
 
     });
@@ -101,12 +104,12 @@ export class LibroMayorComponent implements OnInit {
 
   // Calcular el debe total de cada cuenta
   getTotalDebe(c: Cuenta) {
-    return this.changeDataSource(c).data.map(t => t.debe).reduce((acc, value) => acc + value, 0);
+    return this.changeDataSource(c).data.map(t => t.debe).reduce((actual, siguiente) => actual + siguiente);
   }
 
   // Calcular el haber total de cada cuenta
   getTotalHaber(c: Cuenta) {
-    return this.changeDataSource(c).data.map(t => t.haber).reduce((acc, value) => acc + value, 0);
+    return this.changeDataSource(c).data.map(t => t.haber).reduce((actual, siguiente) => actual + siguiente);
   }
 
 }

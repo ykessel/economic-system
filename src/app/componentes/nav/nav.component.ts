@@ -16,7 +16,7 @@ export class NavComponent {
       shareReplay()
     );
 
-  appName: string = "EcOS";
+  appName = 'EcOS';
   constructor(private breakpointObserver: BreakpointObserver) {
   }
 

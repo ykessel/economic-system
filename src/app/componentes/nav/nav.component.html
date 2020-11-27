@@ -1,9 +1,6 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-               [mode]="(isHandset$ | async) ? 'over' : 'side'"
-               [opened]="(isHandset$ | async) === false"
-               class="sidenav"
-               fixedInViewport>
+  <mat-sidenav #drawer [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false" class="sidenav" fixedInViewport>
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="/nav/economics/transacciones">Transacciones</a>
@@ -13,17 +10,15 @@
       <a mat-list-item routerLink="/nav/economics/balanza">Balanza de Comprobacion</a>
       <a mat-list-item routerLink="/nav/economics/estados">Estados Financieros</a>
       <mat-divider></mat-divider>
+      <a mat-list-item routerLink="/nav/finanzas">Finanzas</a>
       <a mat-list-item routerLink="/nav/concepts">Concepts</a>
       <a mat-list-item routerLink="/nav/search_concepts">Search Concepts</a>
+      <a mat-list-item routerLink="/nav/users">Users</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <button mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async"
-        aria-label="Toggle sidenav"
-        type="button">
+      <button mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async" aria-label="Toggle sidenav" type="button">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>{{ appName }}</span>

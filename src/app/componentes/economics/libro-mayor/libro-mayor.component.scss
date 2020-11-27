@@ -1,20 +1,4 @@
 .T {
   display: grid;
   grid-template-columns: repeat(2, auto);
-  grid-gap: 1em;
-  margin: 1em;
-  background-color: #303030;
-}
-
-mat-card-header {
-  display: flex;
-  justify-content: center;
-}
-
-table {
-  width: 100% !important;
-}
-
-.table-footer {
-  background-color: #40ba61;
 }

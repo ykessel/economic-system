@@ -12,14 +12,15 @@ import {CuentasService} from '../../../servicios/cuentas.service';
   styleUrls: ['./cuentas.component.scss']
 })
 export class CuentasComponent implements OnInit {
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true })
+  paginator: MatPaginator;
+  @ViewChild(MatSort)
+  sort: MatSort;
   dataSource: MatTableDataSource<Cuenta>;
   displayedColumns = ['numero', 'nombre', 'saldo', 'categoria'];
   isLoading = true;
 
-  constructor(private cuentasService: CuentasService) {
-  }
+  constructor(private cuentasService: CuentasService) {}
 
   ngOnInit() {
     this.cuentasService.getCuentas().subscribe(d => {
@@ -28,6 +29,5 @@ export class CuentasComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.isLoading = false;
     });
-
   }
 }

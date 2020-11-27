@@ -18,8 +18,8 @@ export class TransaccionesService {
 
   newTransaccion(transaccion: Transaccion) {
     return this.http.post(this.ecoUrl, transaccion, this.httpOptions).subscribe(x => {
-      console.log('Data: ', x)},
-      err => console.log('Error :',err)
+      console.log('Data: ', x); },
+      err => console.log('Error :', err)
     );
   }
   getTransacciones(): Observable<Transaccion[]> {

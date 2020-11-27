@@ -1,0 +1,7 @@
+<div>
+  <app-users-list 
+    [data]="usersList" 
+    (add)="usersList = add(usersList)" 
+    (remove)="usersList = remove(usersList, $event)">
+  </app-users-list>
+</div>
