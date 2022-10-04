@@ -3,11 +3,8 @@
 
   <mat-tab label="Activos">
     <div class="T">
-      <app-activos 
-      [activos]="cuentasActivos" 
-      [displayedColumns]="displayedColumns" 
-      (changeDataSource)="changeDataSource($event)"
-      (saldo)="saldo($event)">
+      <app-activos [activos]="cuentasActivos" [displayedColumns]="displayedColumns" [transacciones]="transacciones"
+        (sourceEvento)="transacciones = changeDataSource($event)">
       </app-activos>
     </div>
   </mat-tab>
@@ -15,11 +12,8 @@
 
   <mat-tab label="Pasivos">
     <div class="T">
-      <app-pasivos 
-      [pasivos]="cuentasPasivos" 
-      [displayedColumns]="displayedColumns" 
-      (changeDataSource)="changeDataSource($event)"
-      (saldo)="saldo($event)">
+      <app-pasivos [pasivos]="cuentasPasivos" [displayedColumns]="displayedColumns"
+        (changeDataSource)="changeDataSource($event)" (saldo)="saldo($event)">
       </app-pasivos>
     </div>
   </mat-tab>
@@ -27,11 +21,8 @@
 
   <mat-tab label="Capital Contable del Propietario">
     <div class="T">
-      <app-capital 
-      [capital]="cuentasCapital" 
-      [displayedColumns]="displayedColumns" 
-      (changeDataSource)="changeDataSource($event)"
-      (saldo)="saldo($event)">
+      <app-capital [capital]="cuentasCapital" [displayedColumns]="displayedColumns"
+        (changeDataSource)="changeDataSource($event)" (saldo)="saldo($event)">
       </app-capital>
     </div>
   </mat-tab>
@@ -39,11 +30,8 @@
 
   <mat-tab label="Ingresos">
     <div class="T">
-      <app-ingresos 
-      [ingresos]="cuentasIngresos" 
-      [displayedColumns]="displayedColumns" 
-      (changeDataSource)="changeDataSource($event)"
-      (saldo)="saldo($event)">
+      <app-ingresos [ingresos]="cuentasIngresos" [displayedColumns]="displayedColumns"
+        (changeDataSource)="changeDataSource($event)" (saldo)="saldo($event)">
       </app-ingresos>
     </div>
   </mat-tab>
@@ -51,11 +39,8 @@
 
   <mat-tab label="Gastos">
     <div class="T">
-      <app-gastos 
-      [gastos]="cuentasGastos" 
-      [displayedColumns]="displayedColumns" 
-      (changeDataSource)="changeDataSource($event)"
-      (saldo)="saldo($event)">
+      <app-gastos [gastos]="cuentasGastos" [displayedColumns]="displayedColumns"
+        (changeDataSource)="changeDataSource($event)" (saldo)="saldo($event)">
       </app-gastos>
     </div>
   </mat-tab>

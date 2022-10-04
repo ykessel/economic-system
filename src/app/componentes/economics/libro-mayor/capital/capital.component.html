@@ -1,4 +1,4 @@
-<mat-card *ngFor="let cuenta of capital">
+<mat-card *ngFor="let cuenta of capital | async">
   <mat-card-header>
     <mat-card-title>{{cuenta.nombre}}</mat-card-title>
     <mat-card-subtitle>Num. de cuenta: {{cuenta.numero}}</mat-card-subtitle>

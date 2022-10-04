@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { Cuenta } from 'modelos';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-gastos',
@@ -9,7 +10,7 @@ import { Cuenta } from 'modelos';
 })
 export class GastosComponent implements OnInit {
   @Input()
-  gastos: Cuenta[];
+  gastos: Observable<Cuenta[]>;
   @Input()
   displayedColumns: string[];
   @Output()

@@ -33,7 +33,7 @@ export class EstadosFinancierosComponent implements OnInit {
   isLoading = true;
   cuentas: Cuenta[];
   utilidadPerdida: number;
-  companyName = 'Kessel Dynamics Corp.';
+  companyName = 'Lessek Dynamics Corp.';
 
   // Variables estado de resultados
   cuentasGastos: MatTableDataSource<Cuenta>;

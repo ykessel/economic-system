@@ -4,8 +4,8 @@
     "icons": [
    
       {
-        "src":"/assets/icon512.png",
-        "sizes": "512x512",
+        "src":"/assets/kc.png",
+        "sizes": "343x216",
         "type": "image/png"
       }       
     ],
